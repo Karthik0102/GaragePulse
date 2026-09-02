@@ -11,7 +11,7 @@ public interface CustomerServices {
 
 	Customer createCustomer(CreateCustomerDto dto) throws Exception;
 
-	List<Customer> getAllCustomers();
+	List<GetCustomerResponseDto> getAllCustomers();
 
 	GetCustomerResponseDto getCustomerById(int id) throws Exception;
 

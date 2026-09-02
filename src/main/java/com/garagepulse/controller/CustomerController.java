@@ -42,10 +42,10 @@ public class CustomerController {
 	}
 
 	@GetMapping("/Customers")
-	public ResponseEntity<List<Customer>> getAllCustomers() {
-		List<Customer> cust = new ArrayList<>();
-		cust = customerService.getAllCustomers();
-		return new ResponseEntity<>(cust, HttpStatus.OK);
+	public ResponseEntity<List<GetCustomerResponseDto>> getAllCustomers() {
+		List<GetCustomerResponseDto> dto = new ArrayList<>();
+		dto = customerService.getAllCustomers();
+		return new ResponseEntity<>(dto, HttpStatus.OK);
 	}
 
 	@GetMapping("/Customer/{id}")

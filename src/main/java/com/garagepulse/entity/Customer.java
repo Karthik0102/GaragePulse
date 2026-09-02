@@ -1,10 +1,14 @@
 package com.garagepulse.entity;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -33,6 +37,17 @@ public class Customer {
 
 	@Column(name = "Address")
 	String address;
+
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+	private List<Vehicle> vehicles;
+
+	public List<Vehicle> getVehicles() {
+		return vehicles;
+	}
+
+	public void setVehicles(List<Vehicle> vehicles) {
+		this.vehicles = vehicles;
+	}
 
 	public int getId() {
 		return id;

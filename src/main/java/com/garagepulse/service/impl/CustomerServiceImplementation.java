@@ -1,14 +1,15 @@
 package com.garagepulse.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.garagepulse.dto.CreateCustomerDto;
 import com.garagepulse.dto.GetCustomerResponseDto;
 import com.garagepulse.dto.UpdateCustomerDetailsDto;
-import com.garagepulse.dto.CreateCustomerDto;
 import com.garagepulse.entity.Customer;
 import com.garagepulse.repository.CustomerRepository;
 import com.garagepulse.service.CustomerServices;
@@ -38,11 +39,29 @@ public class CustomerServiceImplementation implements CustomerServices {
 		}
 	}
 
-	public List<Customer> getAllCustomers() {
-		return repo.findAll();
+	public List<GetCustomerResponseDto> getAllCustomers() {
+		List<Customer> customers = repo.findAll();
+		List<GetCustomerResponseDto> dtoList = new ArrayList<>();
+
+		for (Customer customer : customers) {
+
+			GetCustomerResponseDto dto = new GetCustomerResponseDto();
+
+			dto.setId(customer.getId());
+			dto.setFirstName(customer.getFirstName());
+			dto.setLastName(customer.getLastName());
+			dto.setPhone(customer.getPhone());
+			dto.setEmail(customer.getEmail());
+			dto.setAddress(customer.getAddress());
+
+			dtoList.add(dto);
+
+		}
+
+		return dtoList;
 	}
 
-	@Override
+	
 	public GetCustomerResponseDto getCustomerById(int id) throws Exception {
 
 		Optional<Customer> optCustomer = repo.findById(id);
