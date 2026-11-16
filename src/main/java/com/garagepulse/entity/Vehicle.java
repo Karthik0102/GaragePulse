@@ -1,5 +1,8 @@
 package com.garagepulse.entity;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -39,6 +43,17 @@ public class Vehicle {
 	@ManyToOne
 	@JoinColumn(name = "customer_id")
 	private Customer customer;
+	
+	@OneToMany(mappedBy = "vehicle",cascade = CascadeType.ALL)
+	List<WorkOrder> workOrders;
+
+	public List<WorkOrder> getWorkOrders() {
+		return workOrders;
+	}
+
+	public void setWorkOrders(List<WorkOrder> workOrders) {
+		this.workOrders = workOrders;
+	}
 
 	public int getId() {
 		return id;

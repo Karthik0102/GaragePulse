@@ -195,6 +195,8 @@ public class VehicleServiceImpl implements VehicleServices {
 	}
 
 	public String deleteVehicle(int vehicleId) {
+		
+		System.out.println("vehicle ID :"+vehicleId);
 		Optional<Vehicle> optVehicle = vehicleRepo.findById(vehicleId);
 		if (optVehicle.isPresent()) {
 			Vehicle vehicle = optVehicle.get();
